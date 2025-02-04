@@ -1,0 +1,15 @@
+<h2 mat-dialog-title style="text-align: center;">DATOS DEL CLIENTE</h2>
+<mat-dialog-content>
+    <mat-list style="text-align:justify;">
+      <mat-list-item><strong>Nombre:</strong> {{ data.firstFormGroup.nombre }}</mat-list-item>
+      <mat-list-item><strong>Dirección:</strong> {{ data.firstFormGroup.direccion }}</mat-list-item>
+      <mat-list-item><strong>Teléfono:</strong> {{ data.firstFormGroup.telefono }}</mat-list-item>
+      <mat-list-item><strong>Email:</strong> {{ data.firstFormGroup.email }}</mat-list-item>
+      <mat-list-item><strong>Contraseña:</strong> {{ data.firstFormGroup.passwd }}</mat-list-item>
+      <mat-list-item><strong>Clases:</strong> {{ data.secondFormGroup.clases }}</mat-list-item>
+      <mat-list-item><strong>Género:</strong> {{ data.secondFormGroup.genero }}</mat-list-item>
+    </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
