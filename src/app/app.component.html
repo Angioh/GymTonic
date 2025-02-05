@@ -103,7 +103,7 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" label="Clases a tomar">
     <form [formGroup]="secondFormGroup">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="margin-top: 1em">
         <mat-label>Clases</mat-label>
         <mat-select [multiple]="true" formControlName="clases" required>
           <mat-option value="Pilates">Pilates</mat-option>
