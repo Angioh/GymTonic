@@ -1,49 +1,101 @@
-<h1 style="text-align: center;">GYM TONIC VIVES</h1>
-<mat-stepper [linear]="isLinear" #stepper >
+<h1 style="text-align: center">GYM TONIC VIVES</h1>
+<mat-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Datos personales</ng-template>
-      <mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 1em">
         <mat-label>Nombre</mat-label>
-        <input
-          matInput
-          placeholder="Nombre completo"
-          formControlName="nombre"
-          required
-        />
+        <input matInput formControlName="nombre" required />
       </mat-form-field>
+      @if(this.firstFormGroup.get('nombre')?.errors?.['required']&&
+      firstFormGroup.get("nombre")?.touched) { <br />
+      <mat-error class="error">- El nombre no puede quedar vacío</mat-error>
+      } @if(this.firstFormGroup.get('nombre')?.errors?.['minlength']&&
+      firstFormGroup.get("nombre")?.touched) { <br />
+      <mat-error class="error"
+        >- No puede tener menos de 4 caracteres</mat-error
+      >
+      }
       <br />
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Dirección</mat-label>
         <input matInput formControlName="direccion" required />
       </mat-form-field>
+      @if(this.firstFormGroup.get('direccion')?.errors?.['required']&&
+      firstFormGroup.get("direccion")?.touched) { <br />
+      <mat-error class="error">- La dirección no puede quedar vacía</mat-error>
+      } @if(this.firstFormGroup.get('direccion')?.errors?.['minlength']&&
+      firstFormGroup.get("direccion")?.touched) { <br />
+      <mat-error class="error"
+        >- No puede tener menos de 10 caracteres</mat-error
+      >
+      }
       <br />
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Teléfono</mat-label>
-        <input matInput formControlName="telefono" required />
+        <input matInput formControlName="telefono" required maxlength="9" />
       </mat-form-field>
+      @if(this.firstFormGroup.get('telefono')?.errors?.['required']&&
+      firstFormGroup.get("telefono")?.touched) { <br />
+      <mat-error class="error">- El teléfono no puede quedar vacío</mat-error>
+      } @if(this.firstFormGroup.get('telefono')?.errors?.['esNumero']&&
+      firstFormGroup.get("telefono")?.touched) { <br />
+      <mat-error class="error"
+        >- Solo pueden ser dígitos y empezar por 6,7 ó 9</mat-error
+      >
+      } @if(this.firstFormGroup.get('telefono')?.errors?.['minlength']&&
+      firstFormGroup.get("telefono")?.touched) { <br />
+      <mat-error class="error">- Tiene que ingresar 9 dígitos</mat-error>
+      }
       <br />
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" required />
       </mat-form-field>
+      @if(this.firstFormGroup.get('email')?.errors?.['required']&&
+      firstFormGroup.get("email")?.touched) { <br />
+      <mat-error class="error">- El email no puede quedar vacío</mat-error>
+      } @if(this.firstFormGroup.get('email')?.errors?.['email']&&
+      firstFormGroup.get("email")?.touched) { <br />
+      <mat-error class="error">- Email no válido</mat-error>
+      }
       <br />
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input matInput type="password" formControlName="passwd" required  />
+        <input matInput type="password" formControlName="passwd" required />
       </mat-form-field>
+      @if(this.firstFormGroup.get('passwd')?.errors?.['required']&&
+      firstFormGroup.get("passwd")?.touched) { <br />
+      <mat-error class="error">- La contraseña es obligatoria</mat-error>
+      } @if(this.firstFormGroup.get('passwd')?.errors?.['minlength']&&
+      firstFormGroup.get("passwd")?.touched) { <br />
+      <mat-error class="error">- No puede ser inferior a 5 dígitos </mat-error>
+      }
       <br />
-      <mat-form-field>
-        <mat-label >Confirmar contraseña</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar contraseña</mat-label>
         <input matInput type="password" formControlName="passwd2" required />
       </mat-form-field>
-      <br>
-      @if(firstFormGroup.hasError("mismaPasswd")&& firstFormGroup.get("passwd2")?.touched){
-        <span style="color:rgb(184, 9, 9);">Las contraseñas no coinciden.</span>
+      @if(this.firstFormGroup.get('passwd2')?.errors?.['required']&&
+      firstFormGroup.get("passwd2")?.touched) { <br />
+      <mat-error class="error">- Confirme su contraseña</mat-error>
+      } @if(this.firstFormGroup.get('passwd2')?.errors?.['minlength']&&
+      firstFormGroup.get("passwd2")?.touched) { <br />
+      <mat-error class="error">- No puede ser inferior a 5 dígitos </mat-error>
+      }
+      <br />
+      @if(firstFormGroup.hasError("mismaPasswd")&&
+      firstFormGroup.get("passwd2")?.touched){
+      <mat-error>- Las contraseñas no coinciden.</mat-error>
       }
 
       <div>
-        <button mat-raised-button matStepperNext [disabled]="firstFormGroup.invalid">
+        <button
+          mat-raised-button
+          matStepperNext
+          [disabled]="firstFormGroup.invalid"
+          style="margin-top: 1em"
+        >
           Siguiente
         </button>
       </div>
@@ -51,7 +103,7 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" label="Clases a tomar">
     <form [formGroup]="secondFormGroup">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Clases</mat-label>
         <mat-select [multiple]="true" formControlName="clases" required>
           <mat-option value="Pilates">Pilates</mat-option>
@@ -59,35 +111,59 @@
           <mat-option value="Boxeo">Boxeo</mat-option>
         </mat-select>
       </mat-form-field>
-      <br />
-        <mat-label style="color: black;">Género</mat-label>
-        <br>
-        <mat-radio-group name="genero" formControlName="genero" required>
-          <mat-radio-button value="Masculino">Masculino</mat-radio-button>
-          <mat-radio-button value="Femenino">Femenino</mat-radio-button>
-        </mat-radio-group>
-      
-      <br>
-      @if (secondFormGroup.get("genero")?.errors?.["required"]) {
-        <span style="color: rgb(184, 9, 9);">Tiene que seleccionar un género</span>
+      @if(this.secondFormGroup.get('clases')?.errors?.['required']&&
+      secondFormGroup.get("clases")?.touched) { <br />
+      <mat-error class="error"
+        >- Debe seleccionar al menos una clase
+      </mat-error>
       }
       <br />
-      <mat-checkbox formControlName="condiciones" required>Aceptar condiciones</mat-checkbox>
-      <br>
-      @if (secondFormGroup.get("condiciones")?.errors?.["required"]) {
-        <span style="color: rgb(184, 9, 9);">Tiene que aceptar las condiciones</span>
+      <mat-label style="color: black">Género</mat-label>
+      <br />
+      <mat-radio-group name="genero" formControlName="genero" required>
+        <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+        <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+        <mat-radio-button value="Otro">Otro</mat-radio-button>
+      </mat-radio-group>
+      @if(this.secondFormGroup.get('genero')?.errors?.['required']&&
+      secondFormGroup.get("genero")?.touched) { <br />
+      <mat-error class="error">- Debe seleccionar uno </mat-error>
       }
-      
-      
 
-      <div>
+      <br />
+      @if (secondFormGroup.get("genero")?.errors?.["required"]) {
+      <span style="color: rgb(184, 9, 9)">Tiene que seleccionar un género</span>
+      }
+      <br />
+      <mat-checkbox formControlName="condiciones" required
+        >Aceptar condiciones</mat-checkbox
+      >
+      <br />
+      @if (secondFormGroup.get("condiciones")?.errors?.["required"]) {
+      <span style="color: rgb(184, 9, 9)"
+        >Tiene que aceptar las condiciones</span
+      >
+      }
+
+      <div style="margin-top: 1em;">
         <button mat-raised-button matStepperPrevious>Atrás</button>
-        <button mat-raised-button (click)="stepper.reset()" style="color: rgb(184, 9, 9);">Reset</button>
-        <button mat-raised-button matStepperNext [disabled]="secondFormGroup.invalid" (click)="openDialog()" style="color: rgb(43, 175, 43);">INSCRIBIR</button>
-        
+        <button
+          mat-raised-button
+          (click)="stepper.reset()"
+          style="color: rgb(184, 9, 9)"
+        >
+          Reset
+        </button>
+        <button
+          mat-raised-button
+          matStepperNext
+          [disabled]="secondFormGroup.invalid"
+          (click)="openDialog()"
+          style="color: rgb(43, 175, 43)"
+        >
+          INSCRIBIR
+        </button>
       </div>
     </form>
   </mat-step>
-
 </mat-stepper>
-

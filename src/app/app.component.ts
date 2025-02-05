@@ -44,8 +44,8 @@ export class AppComponent {
 
   firstFormGroup = this._formBuilder.group({
     nombre: new FormControl('',[ Validators.required,ValidacionesPropias.esLetra,Validators.minLength(4)]),
-    direccion: new FormControl('',[ Validators.required,ValidacionesPropias.esLetra,Validators.minLength(5)]),
-    telefono: new FormControl('',[ Validators.required,ValidacionesPropias.esNumero,Validators.minLength(9),Validators.maxLength(9)]),
+    direccion: new FormControl('',[ Validators.required,ValidacionesPropias.esLetra,Validators.minLength(10)]),
+    telefono: new FormControl('',[ Validators.required,ValidacionesPropias.esNumero,Validators.minLength(9)]),
     email: new FormControl('',[ Validators.required,ValidacionesPropias.esLetra,Validators.minLength(5),Validators.email]),
     passwd: new FormControl('',[ Validators.required,Validators.minLength(5)]),
     passwd2: new FormControl('',[ Validators.required,Validators.minLength(5)]),
@@ -78,7 +78,7 @@ export class AppComponent {
 })
 export class DialogDatos {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any, // Recibe los datos del diálogo
-    public dialogRef: MatDialogRef<DialogDatos>, // Referencia al diálogo
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    public dialogRef: MatDialogRef<DialogDatos>, 
   ) {}
 }
